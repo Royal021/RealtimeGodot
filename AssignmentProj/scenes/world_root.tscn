@@ -1,5 +1,38 @@
-[gd_scene format=3 uid="uid://d4gkd43j2pkwx"]
+[gd_scene load_steps=6 format=3 uid="uid://d4gkd43j2pkwx"]
+
+[ext_resource type="PackedScene" uid="uid://57812qpat30e" path="res://scenes/ship.tscn" id="1_le8r7"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a1aqc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hlq32"]
+size = Vector3(200, 11.905, 300)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_em5jm"]
+albedo_color = Color(1, 0.0745098, 0.937255, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ahdv5"]
+material = SubResource("StandardMaterial3D_em5jm")
+size = Vector3(200, 1, 200)
 
 [node name="world_root" type="Node3D"]
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="MSHIP" parent="." instance=ExtResource("1_le8r7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.30577, 0, -3.61969)
+
+[node name="Camera3D" type="Camera3D" parent="MSHIP"]
+transform = Transform3D(1, 0, 0, 0, 0.947768, 0.318959, 0, -0.318959, 0.947768, 0, 3.889, 10.7426)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0540788, 0.998537, 0, -0.998537, -0.0540788, 0.0724945, 36.931, 0.0142269)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.17484, 0)
+physics_material_override = SubResource("PhysicsMaterial_a1aqc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.83843, -12.2054, 0.186321)
+shape = SubResource("BoxShape3D_hlq32")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0900908, -4.23902, -1.42867)
+mesh = SubResource("BoxMesh_ahdv5")

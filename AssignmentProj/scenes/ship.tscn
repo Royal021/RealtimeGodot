@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://57812qpat30e"]
+[gd_scene load_steps=17 format=3 uid="uid://57812qpat30e"]
 
 [ext_resource type="Texture2D" uid="uid://cteavoldmkf7b" path="res://assets/ExportedAssets/MSHIP_Metal035.png" id="1_34g6b"]
+[ext_resource type="Script" path="res://scripts/ship.gd" id="1_vqrrp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ov814"]
 resource_name = "ShipBodyMat"
@@ -182,6 +183,7 @@ height = 5.779
 size = Vector3(1.82, 1.335, 6.325)
 
 [node name="MSHIP" type="CharacterBody3D"]
+script = ExtResource("1_vqrrp")
 
 [node name="ShipSkeleton" type="Node3D" parent="."]
 
