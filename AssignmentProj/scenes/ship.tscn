@@ -88,6 +88,24 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, 0.0957447, -0.015415, -0.158759, 0.982543)
 
+[sub_resource type="Animation" id="Animation_4ryxe"]
+resource_name = "ShipSkeletonAction"
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShipSkeleton/Skeleton3D:arm.r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.119261, 0.0590689, 0.128064, 0.982796)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShipSkeleton/Skeleton3D:arm.l")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.0957447, -0.015415, -0.158759, 0.982543)
+
 [sub_resource type="Animation" id="Animation_8l6ia"]
 resource_name = "ShipSkeleton_002"
 length = 0.001
@@ -123,24 +141,6 @@ tracks/1/path = NodePath("ShipSkeleton/Skeleton3D:arm.r")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, 0.119261, 0.0590689, 0.128064, 0.982796)
-
-[sub_resource type="Animation" id="Animation_4ryxe"]
-resource_name = "ShipSkeletonAction"
-length = 0.001
-tracks/0/type = "rotation_3d"
-tracks/0/imported = true
-tracks/0/enabled = true
-tracks/0/path = NodePath("ShipSkeleton/Skeleton3D:arm.r")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.119261, 0.0590689, 0.128064, 0.982796)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = true
-tracks/1/enabled = true
-tracks/1/path = NodePath("ShipSkeleton/Skeleton3D:arm.l")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0.0957447, -0.015415, -0.158759, 0.982543)
 
 [sub_resource type="Animation" id="Animation_noqhe"]
 resource_name = "wingUp"
@@ -182,7 +182,8 @@ height = 5.779
 [sub_resource type="BoxShape3D" id="BoxShape3D_lbnta"]
 size = Vector3(1.82, 1.335, 6.325)
 
-[node name="MSHIP" type="CharacterBody3D"]
+[node name="mShip" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.87643)
 script = ExtResource("1_vqrrp")
 
 [node name="ShipSkeleton" type="Node3D" parent="."]
@@ -263,3 +264,9 @@ shape = SubResource("CapsuleShape3D_k00rj")
 [node name="CockpitCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.187958, -3.35736)
 shape = SubResource("BoxShape3D_lbnta")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.819)
+
+[node name="shipBulletContainer" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.15702)

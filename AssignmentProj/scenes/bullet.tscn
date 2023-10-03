@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0pyqeotn7p37"]
+
+[ext_resource type="Script" path="res://scripts/bullet.gd" id="1_xluni"]
+[ext_resource type="PackedScene" uid="uid://dq3n6hfdcx1s0" path="res://assets/ExportedAssets/bullet.glb" id="2_aupw7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trqyb"]
+
+[node name="Area3D" type="Area3D"]
+script = ExtResource("1_xluni")
+
+[node name="bulletCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0998154, -0.0415657, -2.78521)
+shape = SubResource("BoxShape3D_trqyb")
+
+[node name="bulletMesh" parent="." instance=ExtResource("2_aupw7")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
