@@ -11,3 +11,5 @@
 [node name="BodyCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.797721, 0)
 shape = SubResource("CapsuleShape3D_s1x73")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]

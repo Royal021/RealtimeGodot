@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 signal change_score(new_score)
-@export var speed = 5
+@export var speed = 10
 @export var bullet: PackedScene
 
 
@@ -15,6 +15,10 @@ var health_percent = 1.0  # 1.0 = 100%hp, 0 = 0%hp
 
 func _ready():
 	connect("change_score", mainHud.do_change_score)
+	if !$mainMusic.playing:
+		$mainMusic.play()
+		###$mainMusic.stop()
+		
 	
 
 func _process(delta):
@@ -39,8 +43,14 @@ func _process(delta):
 	
 	
 func do_movement(dtime):
-	var input_vec = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	var move_vec = Vector3(input_vec.x, input_vec.y,10).normalized()  * speed #* dtime
+	var input_vec = Input.get_vector( "move_right", "move_left",  "move_down", "move_up")
+	var move_vec = Vector3(input_vec.x, input_vec.y,1).normalized()  * speed #* dtime
+	if($CockpitCollision.global_position.x <=-100 ||$CockpitCollision.global_position.x >=100):
+		print($CockpitCollision.global_position.x)
+		move_vec.x = -2*move_vec.x
+	if($CockpitCollision.global_position.y <=5 ||$CockpitCollision.global_position.x >=100):
+		move_vec.y =-2*move_vec.y
+		print($CockpitCollision.global_position.y)
 	velocity = move_vec
 	move_and_slide()
 	
