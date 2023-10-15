@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://c52e3yc7u432q"]
+
+[ext_resource type="AudioStream" uid="uid://hu50b42d22t3" path="res://assets/Sounds/Ingame.wav" id="1_mh2s0"]
+[ext_resource type="AudioStream" uid="uid://bcycthudld4k8" path="res://assets/Sounds/fireSound.wav" id="2_hjqfh"]
+[ext_resource type="AudioStream" uid="uid://ppwwmbxh84t5" path="res://assets/Sounds/deathSound.wav" id="3_6hpdw"]
+[ext_resource type="AudioStream" uid="uid://cydwcbtb5jvx7" path="res://assets/Sounds/PointSound.wav" id="4_jrn5t"]
+[ext_resource type="AudioStream" uid="uid://4ua76kwuk3sy" path="res://assets/Sounds/TitleScreen.wav" id="5_2u55j"]
+
+[node name="SoundsContainer" type="Node3D"]
+
+[node name="InGameStream" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_mh2s0")
+
+[node name="ShotSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_hjqfh")
+max_polyphony = 30
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_6hpdw")
+
+[node name="PointSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jrn5t")
+
+[node name="TitleSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_2u55j")

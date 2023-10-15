@@ -10,13 +10,20 @@ var time_survived = 0.0  #constantly add delt time to this
 var time_score = 0
 
 var health_percent = 1.0  # 1.0 = 100%hp, 0 = 0%hp
+var previous_hp = health_percent
+var iFrameTime = 0.0
+var midHP = 0.5
+var lowHP = 0.3
 @onready var mainHud = get_node("/root/world_root/mainHud")
-
+@onready var highHealthyShipTex = preload("res://assets/ExportedAssets/Tiles129B.png")
+@onready var midHealthyShipTex = preload("res://assets/ExportedAssets/Plastic012A.png")
+@onready var lowHealthyShipTex = preload("res://assets/ExportedAssets/Foil001.png")
+  
 
 func _ready():
 	connect("change_score", mainHud.do_change_score)
-	if !$mainMusic.playing:
-		$mainMusic.play()
+	if !$SoundsContainer/InGameStream.playing:
+		$SoundsContainer/InGameStream.play()
 		###$mainMusic.stop()
 		
 	
@@ -26,20 +33,38 @@ func _process(delta):
 	
 	mainHud.do_change_health(health_percent)
 	
-	time_survived+=delta
+	if(iFrameTime<=0.0):
+		health_percent = health_percent -1*delta
+	if(iFrameTime>0):
+		iFrameTime-=delta
+	print(iFrameTime)
+
+	if(health_percent!=previous_hp):	
+		if(health_percent>midHP && previous_hp < midHP):  #hp goes up and texture changes
+			change_material_hp(health_percent)
+		if(health_percent<midHP && previous_hp > midHP):  #hp goes down and texture changes to middle texture
+			change_material_hp(health_percent)
+		if(health_percent<lowHP && previous_hp > lowHP):  #hp goes down and texture changes to low texture
+			change_material_hp(health_percent)
+
+	time_survived+=delta	
 	if int(time_survived) > time_score:
 		time_score = int(time_survived)
 		#this code :calls" the signal notifying the scrit that is listening to it
 		emit_signal("change_score", time_score)
-		print("points!")
+		#print("points!")
 	
 	if Input.is_action_just_pressed("fire"):
 		var new_bullet = bullet.instantiate()
 		get_node("../bullet_container").add_child(new_bullet)
 		new_bullet.global_position = $shipBulletContainer.global_position
 		new_bullet.global_rotation = global_rotation
+		$SoundsContainer/ShotSound.play()
 		
-	
+		
+	if (health_percent<=0):
+		$SoundsContainer/DeathSound.play()
+	previous_hp = health_percent
 	
 	
 func do_movement(dtime):
@@ -50,11 +75,19 @@ func do_movement(dtime):
 		move_vec.x = -2*move_vec.x
 	if($CockpitCollision.global_position.y <=5 ||$CockpitCollision.global_position.x >=100):
 		move_vec.y =-2*move_vec.y
-		print($CockpitCollision.global_position.y)
+		#print($CockpitCollision.global_position.y)
 	velocity = move_vec
 	move_and_slide()
 	
-	
+func change_material_hp(hp):
+	if(hp>=0.5):
+		$ShipSkeleton/Skeleton3D/ShipMesh.get_mesh().get("surface_0/material").set_texture(StandardMaterial3D.TEXTURE_ALBEDO, highHealthyShipTex)
+	if(hp<0.5):
+		$ShipSkeleton/Skeleton3D/ShipMesh.get_mesh().get("surface_0/material").set_texture(StandardMaterial3D.TEXTURE_ALBEDO, midHealthyShipTex)
+		iFrameTime = 3.0
+	if(hp<0.25):
+		$ShipSkeleton/Skeleton3D/ShipMesh.get_mesh().get("surface_0/material").set_texture(StandardMaterial3D.TEXTURE_ALBEDO, lowHealthyShipTex)
+		iFrameTime = 3.0
 
 #func got_pickup(the_pickup):
 #	print("You got a pickup")

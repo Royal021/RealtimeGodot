@@ -18,11 +18,11 @@ size = Vector3(200, 1, 200)
 
 [node name="world_root" type="Node3D"]
 
-[node name="mShip" parent="." instance=ExtResource("1_le8r7")]
+[node name="playerShip" parent="." instance=ExtResource("1_le8r7")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.30577, 0, -3.61969)
 bullet = ExtResource("2_8xt31")
 
-[node name="Camera3D" type="Camera3D" parent="mShip"]
+[node name="Camera3D" type="Camera3D" parent="playerShip"]
 transform = Transform3D(1, 1.94753e-08, 1.18976e-08, -2.26267e-08, 0.778013, 0.628248, 2.97886e-09, -0.628248, 0.778013, -4.29153e-06, 25.394, 50.394)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

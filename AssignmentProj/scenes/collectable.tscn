@@ -1,15 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://db2tg0m6yguh8"]
+[gd_scene load_steps=4 format=3 uid="uid://db2tg0m6yguh8"]
 
+[ext_resource type="Script" path="res://scripts/collectable.gd" id="1_8j62o"]
 [ext_resource type="PackedScene" uid="uid://cgxv4ce06gssu" path="res://assets/ExportedAssets/monkcoll.glb" id="1_g36ei"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s1x73"]
 
 [node name="Area3D" type="Area3D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_8j62o")
 
 [node name="MonkeyCollectible" parent="." instance=ExtResource("1_g36ei")]
 
 [node name="BodyCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.797721, 0)
 shape = SubResource("CapsuleShape3D_s1x73")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]

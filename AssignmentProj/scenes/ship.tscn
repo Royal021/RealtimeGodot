@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cteavoldmkf7b" path="res://assets/ExportedAssets/MSHIP_Metal035.png" id="1_34g6b"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_vqrrp"]
-[ext_resource type="AudioStream" uid="uid://hu50b42d22t3" path="res://assets/Sounds/Ingame.wav" id="3_5rpvx"]
+[ext_resource type="PackedScene" uid="uid://c52e3yc7u432q" path="res://scenes/audioPlayer.tscn" id="3_tdjvm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ov814"]
 resource_name = "ShipBodyMat"
@@ -185,6 +185,8 @@ size = Vector3(1.82, 1.335, 6.325)
 
 [node name="mShip" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.87643)
+collision_layer = 2
+collision_mask = 13
 script = ExtResource("1_vqrrp")
 
 [node name="ShipSkeleton" type="Node3D" parent="."]
@@ -272,6 +274,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.819)
 [node name="shipBulletContainer" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.15702)
 
-[node name="mainMusic" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_5rpvx")
-volume_db = -13.013
+[node name="SoundsContainer" parent="." instance=ExtResource("3_tdjvm")]
