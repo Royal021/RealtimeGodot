@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://jsgtbvhe48wa"]
 
 [ext_resource type="Script" path="res://scripts/enemyBody.gd" id="1_gja5b"]
-[ext_resource type="AudioStream" uid="uid://cotuem1crgcw" path="res://assets/Sounds/ShipExplosion.wav" id="2_1i6mk"]
+[ext_resource type="PackedScene" uid="uid://0hidwhdfeqhd" path="res://scenes/EnemyBullet.tscn" id="2_d6kfn"]
 [ext_resource type="Texture2D" uid="uid://g6mcogsom5cc" path="res://assets/EnemyTex/Green.png" id="2_kfahe"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nv8i7"]
@@ -46,6 +46,7 @@ size = Vector3(5, 12, 18)
 collision_layer = 8
 collision_mask = 19
 script = ExtResource("1_gja5b")
+EnemyBullet = ExtResource("2_d6kfn")
 
 [node name="enemyBody" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_sm8ho")
@@ -56,7 +57,7 @@ mesh = SubResource("ArrayMesh_sm8ho")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.35805, 0)
 shape = SubResource("BoxShape3D_mn5gs")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_1i6mk")
+[node name="EnemyBulletContainer" type="Node3D" parent="."]
+transform = Transform3D(15.1145, 0, -3.55271e-15, 0, 1, 0, 0, 0, 1, 6.3309, 3.0847, -9.33741e-09)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="enemy_die"]

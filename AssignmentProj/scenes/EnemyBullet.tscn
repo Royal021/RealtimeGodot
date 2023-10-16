@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://0hidwhdfeqhd"]
+
+[ext_resource type="Script" path="res://scripts/EnemyBullet.gd" id="1_8b0h5"]
+[ext_resource type="PackedScene" uid="uid://dq3n6hfdcx1s0" path="res://assets/ExportedAssets/bullet.glb" id="2_w4u38"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trqyb"]
+
+[node name="Area3D" type="Area3D"]
+transform = Transform3D(0.999986, -0.00441896, 0.00275826, 0.00442562, 0.999987, -0.00240981, -0.00274756, 0.002422, 0.999993, 0, 0, 0)
+collision_layer = 16
+collision_mask = 11
+script = ExtResource("1_8b0h5")
+
+[node name="bulletCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0998154, -0.0415657, -2.78521)
+shape = SubResource("BoxShape3D_trqyb")
+
+[node name="bulletMesh" parent="." instance=ExtResource("2_w4u38")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered" flags=18]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="die" flags=18]

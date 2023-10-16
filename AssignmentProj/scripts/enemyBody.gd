@@ -1,17 +1,19 @@
 extends CharacterBody3D
 
+@export var EnemyBullet: PackedScene
 
 @onready var highEnemyShipTex = preload("res://assets/EnemyTex/Green.png")
 @onready var midEnemyShipTex = preload("res://assets/EnemyTex/Yellow.png")
 @onready var lowEnemyShipTex = preload("res://assets/EnemyTex/Red.png")
   
-
+var bulletTime = 2.0
 const SPEED = 5.0
 var enemyHP = 1.0
 var prevHP = enemyHP
 var midHP = 0.6
 var lowHP = 0.2
 func _process(delta):
+	
 	
 	if(enemyHP<=0.0):
 		queue_free()
@@ -23,7 +25,18 @@ func _process(delta):
 			
 		if(enemyHP<lowHP && prevHP> lowHP):  #hp goes down and texture changes to low texture
 			change_material_hp(enemyHP)
-
+	
+	
+	
+	bulletTime-=delta
+	
+	if(bulletTime<=0):
+		var new_bullet = EnemyBullet.instantiate()
+		get_node("../bullet_container").add_child(new_bullet)
+		
+		new_bullet.global_position = $EnemyBulletContainer.global_position
+		#new_bullet.global_rotation = $enemyBody.global_rotation 
+		bulletTime = 2.0
 	
 	
 	prevHP = enemyHP
@@ -55,7 +68,6 @@ func _process(delta):
 
 
 func got_shot(shot):
-	print("yay you shot  him")
 	enemyHP-=.2
 	shot.queue_free()
 
@@ -75,4 +87,5 @@ func change_material_hp(hp):
 		
 
 func enemy_die():
+	$deathSound.play()
 	queue_free()

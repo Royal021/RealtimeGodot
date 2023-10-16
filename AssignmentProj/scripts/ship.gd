@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 signal change_score(new_score)
+
 @export var speed = 10
 @export var bullet: PackedScene
 
@@ -8,12 +9,15 @@ signal change_score(new_score)
 var time_survived = 0.0  #constantly add delt time to this
 						#when we apss a new whole number notify the UI that we ashould add a point
 var time_score = 0
+static var point_score = 0
+var total_score = 0
 
 var health_percent = 1.0  # 1.0 = 100%hp, 0 = 0%hp
 var previous_hp = health_percent
 var iFrameTime = 0.0
 var midHP = 0.5
 var lowHP = 0.3
+
 @onready var mainHud = get_node("/root/world_root/mainHud")
 @onready var highHealthyShipTex = preload("res://assets/ExportedAssets/Tiles129B.png")
 @onready var midHealthyShipTex = preload("res://assets/ExportedAssets/Plastic012A.png")
@@ -51,8 +55,9 @@ func _process(delta):
 	time_survived+=delta	
 	if int(time_survived) > time_score:
 		time_score = int(time_survived)
+		total_score = time_score+point_score
 		#this code :calls" the signal notifying the scrit that is listening to it
-		emit_signal("change_score", time_score)
+		emit_signal("change_score", total_score)
 		#print("points!")
 	
 	if Input.is_action_just_pressed("fire"):
@@ -91,13 +96,12 @@ func change_material_hp(hp):
 		iFrameTime = 3.0
 		
 func got_pickup(pickup):
-	print("yay you got it")
+	point_score+=50
+	print(point_score)
 	$AnimationPlayer.play("wingUp")
 	$SoundsContainer/PointSound.play()
 	pickup.queue_free()
 
-
-#func got_pickup(the_pickup):
-#	print("You got a pickup")
-#	$AnimationPlayer.play("wingUp")
-#	the_pickup.queue_free()
+func got_shot(shot):
+	health_percent-=.1
+	shot.queue_free()
