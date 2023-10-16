@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://d4gkd43j2pkwx"]
+[gd_scene load_steps=10 format=3 uid="uid://d4gkd43j2pkwx"]
 
 [ext_resource type="PackedScene" uid="uid://57812qpat30e" path="res://scenes/ship.tscn" id="1_le8r7"]
 [ext_resource type="PackedScene" uid="uid://d0pyqeotn7p37" path="res://scenes/bullet.tscn" id="2_8xt31"]
 [ext_resource type="PackedScene" uid="uid://b82krfwwur527" path="res://scenes/mainHud.tscn" id="2_y7rx8"]
 [ext_resource type="PackedScene" uid="uid://db2tg0m6yguh8" path="res://scenes/collectable.tscn" id="4_q2mgy"]
+[ext_resource type="PackedScene" uid="uid://jsgtbvhe48wa" path="res://scenes/enemyBody.tscn" id="5_cj218"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a1aqc"]
 
@@ -20,7 +21,7 @@ size = Vector3(200, 1, 200)
 [node name="world_root" type="Node3D"]
 
 [node name="playerShip" parent="." instance=ExtResource("1_le8r7")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.30577, 0, -3.61969)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.30577, 10.4641, -3.61969)
 bullet = ExtResource("2_8xt31")
 
 [node name="Camera3D" type="Camera3D" parent="playerShip"]
@@ -47,4 +48,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.56035, 5.05476)
 [node name="mainHud" parent="." instance=ExtResource("2_y7rx8")]
 
 [node name="Monkeyboy" parent="." instance=ExtResource("4_q2mgy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.78097, 3.29218, 55.4774)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.8688, 8.69466, 55.4774)
+
+[node name="enemy" parent="." instance=ExtResource("5_cj218")]
+transform = Transform3D(0.0151139, 0, 0.999886, 0, 1, 0, -0.999886, 0, 0.0151139, 6.04434, 10.0463, 65.3163)

@@ -74,7 +74,7 @@ func do_movement(dtime):
 	if($CockpitCollision.global_position.x <=-100 ||$CockpitCollision.global_position.x >=100):
 		print($CockpitCollision.global_position.x)
 		move_vec.x = -2*move_vec.x
-	if($CockpitCollision.global_position.y <=5 ||$CockpitCollision.global_position.x >=100):
+	if($CockpitCollision.global_position.y <=0 ||$CockpitCollision.global_position.y >=100):
 		move_vec.y =-2*move_vec.y
 		#print($CockpitCollision.global_position.y)
 	velocity = move_vec

@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://57812qpat30e"]
+[gd_scene load_steps=20 format=3 uid="uid://57812qpat30e"]
 
 [ext_resource type="Texture2D" uid="uid://cteavoldmkf7b" path="res://assets/ExportedAssets/MSHIP_Metal035.png" id="1_34g6b"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_vqrrp"]
+[ext_resource type="Texture2D" uid="uid://xprqks0s0ltw" path="res://assets/ExportedAssets/Tiles129B.png" id="2_uhs63"]
 [ext_resource type="PackedScene" uid="uid://c52e3yc7u432q" path="res://scenes/audioPlayer.tscn" id="3_tdjvm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ov814"]
@@ -70,6 +71,9 @@ bind/4/pose = Transform3D(0.115916, -0.977606, 0.175642, 0.967073, 0.151418, 0.2
 bind/5/name = &"neutral_bone"
 bind/5/bone = -1
 bind/5/pose = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jeowp"]
+albedo_texture = ExtResource("2_uhs63")
 
 [sub_resource type="Animation" id="Animation_bl1jv"]
 resource_name = "ShipSkeleton"
@@ -238,6 +242,7 @@ bones/5/scale = Vector3(1, 1, 1)
 [node name="ShipMesh" type="MeshInstance3D" parent="ShipSkeleton/Skeleton3D"]
 mesh = SubResource("ArrayMesh_v3qo4")
 skin = SubResource("Skin_v77cr")
+surface_material_override/0 = SubResource("StandardMaterial3D_jeowp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
