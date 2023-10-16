@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://clw5ihqcf857c"]
+
+[ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_lli43"]
+[ext_resource type="PackedScene" uid="uid://cihy8bnxmh4bu" path="res://assets/ExportedAssets/enemy.glb" id="2_87klt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qviq1"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hu536"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7dubp"]
+size = Vector3(5, 10, 16)
+
+[node name="Enemy" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.323257, -2.38776, 1.3098)
+script = ExtResource("1_lli43")
+
+[node name="EnemyBody" parent="." instance=ExtResource("2_87klt")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EnemyBody"]
+material_override = SubResource("StandardMaterial3D_qviq1")
+mesh = SubResource("ArrayMesh_hu536")
+
+[node name="EnemyColBox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.74611, 0.123111)
+shape = SubResource("BoxShape3D_7dubp")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="enemy_die"]

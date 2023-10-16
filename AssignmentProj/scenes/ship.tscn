@@ -183,7 +183,7 @@ height = 5.779
 [sub_resource type="BoxShape3D" id="BoxShape3D_lbnta"]
 size = Vector3(1.82, 1.335, 6.325)
 
-[node name="mShip" type="CharacterBody3D"]
+[node name="mShip" type="CharacterBody3D" groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.87643)
 collision_layer = 2
 collision_mask = 13

@@ -34,10 +34,11 @@ func _process(delta):
 	mainHud.do_change_health(health_percent)
 	
 	if(iFrameTime<=0.0):
-		health_percent = health_percent -1*delta
+		pass
+		#health_percent = health_percent -1*delta
 	if(iFrameTime>0):
 		iFrameTime-=delta
-	print(iFrameTime)
+	#print(iFrameTime)
 
 	if(health_percent!=previous_hp):	
 		if(health_percent>midHP && previous_hp < midHP):  #hp goes up and texture changes
@@ -88,6 +89,13 @@ func change_material_hp(hp):
 	if(hp<0.25):
 		$ShipSkeleton/Skeleton3D/ShipMesh.get_mesh().get("surface_0/material").set_texture(StandardMaterial3D.TEXTURE_ALBEDO, lowHealthyShipTex)
 		iFrameTime = 3.0
+		
+func got_pickup(pickup):
+	print("yay you got it")
+	$AnimationPlayer.play("wingUp")
+	$SoundsContainer/PointSound.play()
+	pickup.queue_free()
+
 
 #func got_pickup(the_pickup):
 #	print("You got a pickup")

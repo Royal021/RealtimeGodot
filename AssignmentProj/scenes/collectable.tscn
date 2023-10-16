@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s1x73"]
 
-[node name="Area3D" type="Area3D"]
+[node name="Monkeyboy" type="Area3D"]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_8j62o")
@@ -15,3 +15,8 @@ script = ExtResource("1_8j62o")
 [node name="BodyCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.797721, 0)
 shape = SubResource("CapsuleShape3D_s1x73")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="coll_die"]

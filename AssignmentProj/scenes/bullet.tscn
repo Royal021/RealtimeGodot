@@ -6,6 +6,8 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_trqyb"]
 
 [node name="Area3D" type="Area3D"]
+collision_layer = 16
+collision_mask = 9
 script = ExtResource("1_xluni")
 
 [node name="bulletCollider" type="CollisionShape3D" parent="."]

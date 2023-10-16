@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://d4gkd43j2pkwx"]
+[gd_scene load_steps=9 format=3 uid="uid://d4gkd43j2pkwx"]
 
 [ext_resource type="PackedScene" uid="uid://57812qpat30e" path="res://scenes/ship.tscn" id="1_le8r7"]
 [ext_resource type="PackedScene" uid="uid://d0pyqeotn7p37" path="res://scenes/bullet.tscn" id="2_8xt31"]
 [ext_resource type="PackedScene" uid="uid://b82krfwwur527" path="res://scenes/mainHud.tscn" id="2_y7rx8"]
+[ext_resource type="PackedScene" uid="uid://db2tg0m6yguh8" path="res://scenes/collectable.tscn" id="4_q2mgy"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a1aqc"]
 
@@ -44,3 +45,6 @@ mesh = SubResource("BoxMesh_ahdv5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.56035, 5.05476)
 
 [node name="mainHud" parent="." instance=ExtResource("2_y7rx8")]
+
+[node name="Monkeyboy" parent="." instance=ExtResource("4_q2mgy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.78097, 3.29218, 55.4774)
