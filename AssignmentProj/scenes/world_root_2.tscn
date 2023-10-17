@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://p43ohfrtxk3a"]
+[gd_scene load_steps=6 format=3 uid="uid://p43ohfrtxk3a"]
 
 [ext_resource type="Script" path="res://scripts/world_root_2.gd" id="1_dyji5"]
 [ext_resource type="PackedScene" uid="uid://b82krfwwur527" path="res://scenes/mainHud.tscn" id="1_kwxkq"]
 [ext_resource type="PackedScene" uid="uid://57812qpat30e" path="res://scenes/ship.tscn" id="2_3i6ns"]
 [ext_resource type="PackedScene" uid="uid://d0pyqeotn7p37" path="res://scenes/bullet.tscn" id="4_baoqf"]
+[ext_resource type="PackedScene" uid="uid://be4sgnxpab0ke" path="res://scenes/pause_screen.tscn" id="5_bhtrn"]
 
 [node name="world_root2" type="Node3D"]
 script = ExtResource("1_dyji5")
@@ -34,3 +35,7 @@ bullet = ExtResource("4_baoqf")
 
 [node name="Camera3D" type="Camera3D" parent="playerShip"]
 transform = Transform3D(1, 0, 0, 0, 0.955289, 0.295675, 0, -0.295675, 0.955289, 0, 5.69931, 19.8329)
+
+[node name="pauseScreen" parent="." instance=ExtResource("5_bhtrn")]
+process_mode = 2
+visible = false

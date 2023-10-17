@@ -16,17 +16,17 @@ var lowHP = 0.2
 func _process(delta):
 	
 	
-	if(enemyHP<=0.0):
+	if(self.enemyHP<=0.0):
 		$deathSound.play()
 		Globals.point_score+=100
 		queue_free()
-	if(enemyHP!=prevHP):	
-		if(enemyHP>midHP && prevHP < midHP):  #hp goes up and texture changes
-			self.change_material_hp(enemyHP)
-		if(enemyHP<midHP && prevHP > midHP):  #hp goes down and texture changes to middle texture
-			self.change_material_hp(enemyHP)
-		if(enemyHP<lowHP && prevHP> lowHP):  #hp goes down and texture changes to low texture
-			self.change_material_hp(enemyHP)
+	if(self.enemyHP!=self.prevHP):	
+		if(self.enemyHP>midHP && prevHP < midHP):  #hp goes up and texture changes
+			self.change_material_hp(self.enemyHP)
+		if(self.enemyHP<midHP && prevHP > midHP):  #hp goes down and texture changes to middle texture
+			self.change_material_hp(self.enemyHP)
+		if(self.enemyHP<lowHP && prevHP> lowHP):  #hp goes down and texture changes to low texture
+			self.change_material_hp(self.enemyHP)
 	
 	
 	
@@ -77,9 +77,7 @@ func change_material_hp(hp):
 	if(hp>0.7):
 		$enemyBody.get_mesh().get("surface_0/material").set_texture(StandardMaterial3D.TEXTURE_ALBEDO,highEnemyShipTex)
 	if(hp<0.7 && hp>0.3):
-		
 		$enemyBody.get_mesh().get("surface_0/material").set_texture(StandardMaterial3D.TEXTURE_ALBEDO,midEnemyShipTex)
-			
 	if(hp<0.25):
 		$enemyBody.get_mesh().get("surface_0/material").set_texture(StandardMaterial3D.TEXTURE_ALBEDO, lowEnemyShipTex )
 		
