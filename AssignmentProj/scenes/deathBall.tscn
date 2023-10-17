@@ -1,15 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwccgyyh84vqx"]
+[gd_scene load_steps=6 format=3 uid="uid://dwccgyyh84vqx"]
 
 [ext_resource type="Script" path="res://scripts/deathBall.gd" id="1_jwunp"]
+[ext_resource type="Shader" path="res://scripts/deathBall.gdshader" id="2_7q51k"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5qoh0"]
 radius = 10.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8bpum"]
-albedo_color = Color(1, 0, 1, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c5yqa"]
+render_priority = 0
+shader = ExtResource("2_7q51k")
 
 [sub_resource type="SphereMesh" id="SphereMesh_o74sc"]
-material = SubResource("StandardMaterial3D_8bpum")
+material = SubResource("ShaderMaterial_c5yqa")
 radius = 10.0
 height = 20.0
 
