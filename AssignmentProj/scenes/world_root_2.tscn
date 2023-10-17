@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://p43ohfrtxk3a"]
+
+[ext_resource type="Script" path="res://scripts/world_root_2.gd" id="1_dyji5"]
+[ext_resource type="PackedScene" uid="uid://b82krfwwur527" path="res://scenes/mainHud.tscn" id="1_kwxkq"]
+[ext_resource type="PackedScene" uid="uid://57812qpat30e" path="res://scenes/ship.tscn" id="2_3i6ns"]
+[ext_resource type="PackedScene" uid="uid://d0pyqeotn7p37" path="res://scenes/bullet.tscn" id="4_baoqf"]
+
+[node name="world_root2" type="Node3D"]
+script = ExtResource("1_dyji5")
+
+[node name="ObsConstainer" type="Node3D" parent="."]
+
+[node name="FloorContainer" type="Node3D" parent="."]
+
+[node name="CollectibleContainer" type="Node3D" parent="."]
+
+[node name="EnemyContainer" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Enemy_bullet_container" type="Node3D" parent="EnemyContainer"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="bullet_container" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.56035, 5.05476)
+
+[node name="mainHud" parent="." instance=ExtResource("1_kwxkq")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0540788, 0.998537, 0, -0.998537, -0.0540788, 0.0724945, 36.931, 0.0142269)
+
+[node name="playerShip" parent="." instance=ExtResource("2_3i6ns")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 40, 0)
+bullet = ExtResource("4_baoqf")
+
+[node name="Camera3D" type="Camera3D" parent="playerShip"]
+transform = Transform3D(1, 0, 0, 0, 0.955289, 0.295675, 0, -0.295675, 0.955289, 0, 5.69931, 19.8329)

@@ -4,6 +4,7 @@ signal change_score(new_score)
 
 @export var speed = 10
 @export var bullet: PackedScene
+@export var pause_screen: PackedScene
 
 
 var time_survived = 0.0  #constantly add delt time to this
@@ -18,7 +19,7 @@ var iFrameTime = 0.0
 var midHP = 0.5
 var lowHP = 0.3
 
-@onready var mainHud = get_node("/root/world_root/mainHud")
+@onready var mainHud = get_node("../mainHud")
 @onready var highHealthyShipTex = preload("res://assets/ExportedAssets/Tiles129B.png")
 @onready var midHealthyShipTex = preload("res://assets/ExportedAssets/Plastic012A.png")
 @onready var lowHealthyShipTex = preload("res://assets/ExportedAssets/Foil001.png")
@@ -53,12 +54,8 @@ func _process(delta):
 			change_material_hp(health_percent)
 
 	time_survived+=delta	
-	if int(time_survived) > time_score:
-		time_score = int(time_survived)
-		total_score = time_score+point_score
-		#this code :calls" the signal notifying the scrit that is listening to it
-		emit_signal("change_score", total_score)
-		#print("points!")
+	
+
 	
 	if Input.is_action_just_pressed("fire"):
 		var new_bullet = bullet.instantiate()
@@ -70,17 +67,37 @@ func _process(delta):
 		
 	if (health_percent<=0):
 		$SoundsContainer/DeathSound.play()
+		get_tree().change_scene_to_file("res://scenes/lose_screen.tscn")
+		
 	previous_hp = health_percent
+	
+	
+	if int(time_survived) > time_score:
+		time_score = int(time_survived)
+		Globals.total_score = time_score+Globals.point_score
+		emit_signal("change_score", Globals.total_score)
 	
 	
 func do_movement(dtime):
 	var input_vec = Input.get_vector( "move_right", "move_left",  "move_down", "move_up")
-	var move_vec = Vector3(input_vec.x, input_vec.y,1).normalized()  * speed #* dtime
+	var sprint = Input.is_action_pressed("sprint")
+	
+	if(Input.is_action_pressed("pause")):
+		get_tree().paused = true
+		
+		
+	
+	
+	var move_vec = Vector3(input_vec.x, input_vec.y,1).normalized()  * speed
+	if(sprint):
+		move_vec *=2
+	else:
+		move_vec *= Vector3(2,2,0.5)
 	if($CockpitCollision.global_position.x <=-100 ||$CockpitCollision.global_position.x >=100):
 		print($CockpitCollision.global_position.x)
-		move_vec.x = -2*move_vec.x
-	if($CockpitCollision.global_position.y <=0 ||$CockpitCollision.global_position.y >=100):
-		move_vec.y =-2*move_vec.y
+		move_vec.x = -5*move_vec.x
+	if($CockpitCollision.global_position.y <=5 ||$CockpitCollision.global_position.y >=200):
+		move_vec.y =-5*move_vec.y
 		#print($CockpitCollision.global_position.y)
 	velocity = move_vec
 	move_and_slide()
@@ -96,8 +113,7 @@ func change_material_hp(hp):
 		iFrameTime = 3.0
 		
 func got_pickup(pickup):
-	point_score+=50
-	print(point_score)
+	Globals.point_score+=50
 	$AnimationPlayer.play("wingUp")
 	$SoundsContainer/PointSound.play()
 	pickup.queue_free()
@@ -105,3 +121,7 @@ func got_pickup(pickup):
 func got_shot(shot):
 	health_percent-=.1
 	shot.queue_free()
+	
+func got_rammed(obj):
+	health_percent-=.1
+	obj.queue_free()

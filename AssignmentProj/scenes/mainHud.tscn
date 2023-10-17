@@ -1,12 +1,12 @@
 [gd_scene load_steps=5 format=3 uid="uid://b82krfwwur527"]
 
-[ext_resource type="Script" path="res://mainHud.gd" id="1_7m4rj"]
+[ext_resource type="Script" path="res://scripts/mainHud.gd" id="1_ektpp"]
 [ext_resource type="FontFile" uid="uid://den14tfsxyn8u" path="res://assets/Font/monogram/ttf/monogram.ttf" id="2_bn7jt"]
 [ext_resource type="Texture2D" uid="uid://s5kwhh05oqia" path="res://assets/UIelements/hpbar_outer.png" id="2_vcadu"]
 [ext_resource type="Texture2D" uid="uid://bqc234h2weuds" path="res://assets/UIelements/hpbar_inner.png" id="3_b6k3y"]
 
 [node name="mainHud" type="CanvasLayer"]
-script = ExtResource("1_7m4rj")
+script = ExtResource("1_ektpp")
 
 [node name="scoreLabel" type="Label" parent="."]
 offset_right = 69.0

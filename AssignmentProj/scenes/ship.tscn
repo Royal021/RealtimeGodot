@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://57812qpat30e"]
+[gd_scene load_steps=27 format=3 uid="uid://57812qpat30e"]
 
 [ext_resource type="Texture2D" uid="uid://cteavoldmkf7b" path="res://assets/ExportedAssets/MSHIP_Metal035.png" id="1_34g6b"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="1_vqrrp"]
@@ -187,6 +187,35 @@ height = 5.779
 [sub_resource type="BoxShape3D" id="BoxShape3D_lbnta"]
 size = Vector3(1.82, 1.335, 6.325)
 
+[sub_resource type="Gradient" id="Gradient_lssal"]
+offsets = PackedFloat32Array(0, 0.260163, 1)
+colors = PackedColorArray(0.00599488, 0.205837, 0.895366, 1, 0.260163, 0.260163, 0.260163, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4y2uw"]
+gradient = SubResource("Gradient_lssal")
+
+[sub_resource type="Curve" id="Curve_va8ov"]
+_data = [Vector2(0, 0.642105), 0.0, 0.0, 0, 0, Vector2(0.454545, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nm5fw"]
+curve = SubResource("Curve_va8ov")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kvbpw"]
+direction = Vector3(0, 0, 1)
+spread = 10.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+scale_curve = SubResource("CurveTexture_nm5fw")
+color_ramp = SubResource("GradientTexture1D_4y2uw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fxppq"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_a6fem"]
+material = SubResource("StandardMaterial3D_fxppq")
+
 [node name="mShip" type="CharacterBody3D" groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.87643)
 collision_layer = 2
@@ -280,3 +309,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.819)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.15702)
 
 [node name="SoundsContainer" parent="." instance=ExtResource("3_tdjvm")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92531, 0, 7.56504)
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_kvbpw")
+draw_pass_1 = SubResource("SphereMesh_a6fem")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97778, 0, 7.56504)
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_kvbpw")
+draw_pass_1 = SubResource("SphereMesh_a6fem")

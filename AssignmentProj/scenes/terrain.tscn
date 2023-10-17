@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://myty3hcyygm0"]
+
+[ext_resource type="PackedScene" uid="uid://bqdcs2nscbdgc" path="res://assets/ExportedAssets/trenchg.tscn" id="1_cy1t1"]
+[ext_resource type="Script" path="res://scripts/terrain.gd" id="1_np43p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ymq0t"]
+size = Vector3(200, 4, 200)
+
+[node name="Node3D" type="Area3D"]
+collision_mask = 31
+script = ExtResource("1_np43p")
+
+[node name="CollisionBot" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.37896, 0.73101, -5.30633)
+shape = SubResource("BoxShape3D_ymq0t")
+
+[node name="CollisionL" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.681998, -0.731354, 0, 0.731354, 0.681998, 0, 0, 0, 1, 161.963, 71.1183, -5.30633)
+shape = SubResource("BoxShape3D_ymq0t")
+
+[node name="CollisionL2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.681998, 0.731354, 0, -0.731354, 0.681998, 0, 0, 0, 1, -166.91, 71.1183, -5.30633)
+shape = SubResource("BoxShape3D_ymq0t")
+
+[node name="trench" parent="." instance=ExtResource("1_cy1t1")]
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 12.5817, 0, 0, 160.7)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="coll_die"]

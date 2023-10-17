@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://cgxv4ce06gssu" path="res://assets/ExportedAssets/monkcoll.glb" id="1_g36ei"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s1x73"]
+radius = 1.5
+height = 4.0
 
 [node name="Monkeyboy" type="Area3D"]
 collision_layer = 4
