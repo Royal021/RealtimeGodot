@@ -44,7 +44,7 @@ func _process(delta):
 	if(iFrameTime>0):
 		iFrameTime-=delta
 	#print(iFrameTime)
-
+	health_percent -= .1 *delta
 	if(health_percent!=previous_hp):	
 		if(health_percent>midHP && previous_hp < midHP):  #hp goes up and texture changes
 			change_material_hp(health_percent)
