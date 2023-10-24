@@ -310,14 +310,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.15702)
 
 [node name="SoundsContainer" parent="." instance=ExtResource("3_tdjvm")]
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="EngineParticle" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92531, 0, 7.56504)
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_kvbpw")
 draw_pass_1 = SubResource("SphereMesh_a6fem")
 
-[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+[node name="EngineParticle2" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97778, 0, 7.56504)
 amount = 10
+process_material = SubResource("ParticleProcessMaterial_kvbpw")
+draw_pass_1 = SubResource("SphereMesh_a6fem")
+
+[node name="DamageParticle1" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0655425, 0.99785, 0, -0.99785, -0.0655425, 9.30874, 1.61303, 0.907211)
+visible = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_kvbpw")
+draw_pass_1 = SubResource("SphereMesh_a6fem")
+
+[node name="DamageParticle2" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.403881, 0.914812, 0, -0.914812, 0.403881, -1.3511, 0.217986, 0.907211)
+visible = false
+amount = 10
+visibility_aabb = AABB(-4.60064, -4, -4, 9.20128, 8, 8)
 process_material = SubResource("ParticleProcessMaterial_kvbpw")
 draw_pass_1 = SubResource("SphereMesh_a6fem")

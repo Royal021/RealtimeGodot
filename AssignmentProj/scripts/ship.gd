@@ -10,8 +10,7 @@ signal change_score(new_score)
 var time_survived = 0.0  #constantly add delt time to this
 						#when we apss a new whole number notify the UI that we ashould add a point
 var time_score = 0
-static var point_score = 0
-var total_score = 0
+
 
 var health_percent = 1.0  # 1.0 = 100%hp, 0 = 0%hp
 var previous_hp = health_percent
@@ -26,7 +25,7 @@ var lowHP = 0.3
   
 
 func _ready():
-	connect("change_score", mainHud.do_change_score)
+	
 	if !$SoundsContainer/InGameStream.playing:
 		$SoundsContainer/InGameStream.play()
 		###$mainMusic.stop()
@@ -36,7 +35,7 @@ func _ready():
 func _process(delta):
 	do_movement(delta)
 	
-	mainHud.do_change_health(health_percent)
+	
 	
 	if(iFrameTime<=0.0):
 		pass
@@ -44,7 +43,6 @@ func _process(delta):
 	if(iFrameTime>0):
 		iFrameTime-=delta
 	#print(iFrameTime)
-	health_percent -= .1 *delta
 	if(health_percent!=previous_hp):	
 		if(health_percent>midHP && previous_hp < midHP):  #hp goes up and texture changes
 			change_material_hp(health_percent)
@@ -100,17 +98,18 @@ func do_movement(dtime):
 		move_vec.y =-5*move_vec.y
 		#print($CockpitCollision.global_position.y)
 	velocity = move_vec
+	Globals.healthPoints = health_percent
+	
 	move_and_slide()
 	
 func change_material_hp(hp):
 	if(hp>=0.5):
-		$ShipSkeleton/Skeleton3D/ShipMesh.get_mesh().get("surface_0/material").set_texture(StandardMaterial3D.TEXTURE_ALBEDO, highHealthyShipTex)
+		$DamageParticle1.hide()
+		$DamageParticle2.hide()
 	if(hp<0.5):
-		$ShipSkeleton/Skeleton3D/ShipMesh.get_mesh().get("surface_0/material").set_texture(StandardMaterial3D.TEXTURE_ALBEDO, midHealthyShipTex)
-		iFrameTime = 3.0
-	if(hp<0.25):
-		$ShipSkeleton/Skeleton3D/ShipMesh.get_mesh().get("surface_0/material").set_texture(StandardMaterial3D.TEXTURE_ALBEDO, lowHealthyShipTex)
-		iFrameTime = 3.0
+		$DamageParticle1.show()
+	if(hp<0.3):
+		$DamageParticle2.show()
 		
 func got_pickup(pickup):
 	Globals.point_score+=50
