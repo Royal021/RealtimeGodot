@@ -1,7 +1,7 @@
 extends Area3D
 
 func _process(delta):
-	translate_object_local(Vector3(0,0,-20*delta))
+	translate_object_local(Vector3(0,0, Globals.Speed * 4* -20*delta))
 	var shipLocation = get_node("/root/world_root/playerShip")
 	if(shipLocation == null):
 		shipLocation = get_node("/root/world_root2/playerShip")

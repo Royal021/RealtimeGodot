@@ -19,4 +19,4 @@ func _on_body_entered(hit_object):
 
 func _die():
 	queue_free()
-	print("obstaclegone")
+	

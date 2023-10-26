@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://j7rhsncgpg7d"]
+
+[ext_resource type="Script" path="res://scripts/world_root.gd" id="1_2dxnw"]
+[ext_resource type="PackedScene" uid="uid://57812qpat30e" path="res://scenes/ship.tscn" id="2_eueaw"]
+[ext_resource type="PackedScene" uid="uid://d0pyqeotn7p37" path="res://scenes/bullet.tscn" id="3_ewg3k"]
+[ext_resource type="PackedScene" uid="uid://b82krfwwur527" path="res://scenes/mainHud.tscn" id="4_vafd1"]
+[ext_resource type="PackedScene" uid="uid://be4sgnxpab0ke" path="res://scenes/pause_screen.tscn" id="5_6j8c7"]
+
+[node name="world_root" type="Node3D"]
+script = ExtResource("1_2dxnw")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 25, -40)
+fov = 85.0
+
+[node name="playerShip" parent="." instance=ExtResource("2_eueaw")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 25, 0)
+bullet = ExtResource("3_ewg3k")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="playerShip"]
+transform = Transform3D(-1, 9.67096e-08, -3.92112e-08, -7.84224e-08, -0.448524, 0.893771, 6.88491e-08, 0.893771, 0.448524, -2.37827, 36.1216, 24.2012)
+light_energy = 5.124
+light_indirect_energy = 5.0
+shadow_enabled = true
+
+[node name="mainHud" parent="." instance=ExtResource("4_vafd1")]
+
+[node name="bullet_container" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.56035, 5.05476)
+
+[node name="EnemyContainer" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Enemy_bullet_container" type="Node3D" parent="EnemyContainer"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CollectibleContainer" type="Node3D" parent="."]
+
+[node name="FloorContainer" type="Node3D" parent="."]
+
+[node name="ObsConstainer" type="Node3D" parent="."]
+
+[node name="pauseScreen" parent="." instance=ExtResource("5_6j8c7")]
+process_mode = 2
+visible = false

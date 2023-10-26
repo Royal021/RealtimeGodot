@@ -10,14 +10,17 @@
 script = ExtResource("1_m2blw")
 
 [node name="playerShip" parent="." instance=ExtResource("1_le8r7")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.30577, 55.2813, -3.61969)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 25, 0)
 bullet = ExtResource("2_8xt31")
 
-[node name="Camera3D" type="Camera3D" parent="playerShip"]
+[node name="Camera3D" type="Camera3D" parent="playerShip" groups=["obstacle"]]
 transform = Transform3D(1, -9.97259e-09, -3.71501e-09, 1.06223e-08, 0.9566, 0.291403, 6.47731e-10, -0.291403, 0.9566, -1.66893e-06, 4.07563, 19.3464)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.0540788, 0.998537, 0, -0.998537, -0.0540788, 0.0724945, 36.931, 0.0142269)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="playerShip"]
+transform = Transform3D(-1, 9.67096e-08, -3.92112e-08, -7.84224e-08, -0.448524, 0.893771, 6.88491e-08, 0.893771, 0.448524, -2.37827, 36.1216, 24.2012)
+light_energy = 5.124
+light_indirect_energy = 5.0
+shadow_enabled = true
 
 [node name="mainHud" parent="." instance=ExtResource("2_y7rx8")]
 

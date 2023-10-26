@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://fm627yhwivnn"]
+
+[ext_resource type="Script" path="res://scenes/trench.gd" id="1_fst7l"]
+[ext_resource type="PackedScene" uid="uid://ccaw56a17cfmr" path="res://assets/ExportedAssets/whole.glb" id="1_ppfvv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vfflj"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q7pqf"]
+size = Vector3(100, 50, 1)
+
+[node name="Trench" type="Area3D"]
+script = ExtResource("1_fst7l")
+
+[node name="trenchMesh" parent="." instance=ExtResource("1_ppfvv")]
+
+[node name="floorCol" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_vfflj")
+
+[node name="lWall" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 51)
+shape = SubResource("BoxShape3D_q7pqf")
+
+[node name="rWall" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, -51)
+shape = SubResource("BoxShape3D_q7pqf")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -88.1203, 0, 0)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="coll_die"]

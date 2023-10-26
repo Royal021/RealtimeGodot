@@ -18,6 +18,8 @@ var iFrameTime = 0.0
 var midHP = 0.5
 var lowHP = 0.3
 
+var n = 1
+
 @onready var mainHud = get_node("../mainHud")
 @onready var highHealthyShipTex = preload("res://assets/ExportedAssets/Tiles129B.png")
 @onready var midHealthyShipTex = preload("res://assets/ExportedAssets/Plastic012A.png")
@@ -53,7 +55,8 @@ func _process(delta):
 
 	time_survived+=delta	
 	
-
+	if(Input.is_action_pressed("pause")):
+		get_tree().paused = true
 	
 	if Input.is_action_just_pressed("fire"):
 		var new_bullet = bullet.instantiate()
@@ -72,35 +75,44 @@ func _process(delta):
 	
 	if int(time_survived) > time_score:
 		time_score = int(time_survived)
-		Globals.total_score = time_score+Globals.point_score
-		emit_signal("change_score", Globals.total_score)
+		Globals.total_score = time_score*Globals.Speed+Globals.point_score
+		
+		
+	#update globals
+	Globals.healthPoints = health_percent
+	if(Globals.total_score > 100 * n):
+		Globals.Speed*=2
+		n*=2
+	
 	
 	
 func do_movement(dtime):
+	
+	#input Reading
 	var input_vec = Input.get_vector( "move_right", "move_left",  "move_down", "move_up")
 	var sprint = Input.is_action_pressed("sprint")
 	
-	if(Input.is_action_pressed("pause")):
-		get_tree().paused = true
-		
-		
-	
-	
-	var move_vec = Vector3(input_vec.x, input_vec.y,1).normalized()  * speed
+	#movementCalculation
+	var move_vec = Vector3(input_vec.x, input_vec.y,1).normalized()  * Globals.Speed *10
 	if(sprint):
 		move_vec *=2
-	else:
-		move_vec *= Vector3(2,2,0.5)
-	if($CockpitCollision.global_position.x <=-100 ||$CockpitCollision.global_position.x >=100):
-		print($CockpitCollision.global_position.x)
-		move_vec.x = -5*move_vec.x
-	if($CockpitCollision.global_position.y <=5 ||$CockpitCollision.global_position.y >=200):
-		move_vec.y =-5*move_vec.y
-		#print($CockpitCollision.global_position.y)
-	velocity = move_vec
-	Globals.healthPoints = health_percent
 	
+	#confinement adjustments
+	if(self.global_position.x <=-38):
+		self.global_position.x = -38
+	if(self.global_position.x >=38):
+		self.global_position.x = 38
+		move_vec.x = -5*move_vec.x
+	if(self.global_position.y<5):
+		self.global_position.y = 5
+	if(self.global_position.y >50):
+		self.global_position.y = 50
+	#end with movement
+	velocity = move_vec	
 	move_and_slide()
+	
+
+	
 	
 func change_material_hp(hp):
 	if(hp>=0.5):
@@ -114,7 +126,7 @@ func change_material_hp(hp):
 func got_pickup(pickup):
 	Globals.point_score+=50
 	$AnimationPlayer.play("wingUp")
-	$SoundsContainer/PointSound.play()
+	#$SoundsContainer/PointSound.play()
 	pickup.queue_free()
 
 func got_shot(shot):
@@ -124,3 +136,4 @@ func got_shot(shot):
 func got_rammed(obj):
 	health_percent-=.1
 	obj.queue_free()
+	

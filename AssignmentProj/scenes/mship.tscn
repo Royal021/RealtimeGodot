@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwtgutyxy72t1"]
+
+[ext_resource type="PackedScene" uid="uid://dbdakv1o6nvtg" path="res://assets/ExportedAssets/MSHIP.glb" id="1_6hvia"]
+
+[node name="MSHIP" instance=ExtResource("1_6hvia")]

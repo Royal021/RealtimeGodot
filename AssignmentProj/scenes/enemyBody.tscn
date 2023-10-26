@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://jsgtbvhe48wa"]
+[gd_scene load_steps=12 format=3 uid="uid://jsgtbvhe48wa"]
 
 [ext_resource type="Script" path="res://scripts/enemyBody.gd" id="1_gja5b"]
 [ext_resource type="PackedScene" uid="uid://0hidwhdfeqhd" path="res://scenes/EnemyBullet.tscn" id="2_d6kfn"]
@@ -41,11 +41,23 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_r5nf5")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mn5gs"]
-size = Vector3(5, 12, 18)
+size = Vector3(6, 13, 19)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c0dh1"]
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 9.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_saytg"]
+albedo_color = Color(0.960784, 0, 0.223529, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_tpj58"]
+material = SubResource("StandardMaterial3D_saytg")
 
 [node name="enemy" type="CharacterBody3D" groups=["enemy"]]
 collision_layer = 8
-collision_mask = 19
+collision_mask = 17
 script = ExtResource("1_gja5b")
 EnemyBullet = ExtResource("2_d6kfn")
 
@@ -66,5 +78,17 @@ stream = ExtResource("4_avpfk")
 volume_db = 14.414
 max_distance = 258.75
 area_mask = 31
+
+[node name="DamagePart1" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.047658, 6.27308, -4.73474)
+visible = false
+process_material = SubResource("ParticleProcessMaterial_c0dh1")
+draw_pass_1 = SubResource("TorusMesh_tpj58")
+
+[node name="DamagePart2" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.047658, 3.82608, 5.79373)
+visible = false
+process_material = SubResource("ParticleProcessMaterial_c0dh1")
+draw_pass_1 = SubResource("TorusMesh_tpj58")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="enemy_die"]
